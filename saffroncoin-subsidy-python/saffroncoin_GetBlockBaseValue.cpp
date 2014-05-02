@@ -9,18 +9,9 @@ static const int64_t COIN = 100000000;
 int64_t static GetBlockBaseValue(int nBits, int nHeight)
 {
 
- int64 nSubsidy = nStartSubsidy;
+ int64_t nSubsidy = 72 * COIN;
+ int64_t nMinSubsidy = 0.017 * COIN;
 
-    std::string cseed_str = prevHash.ToString().substr(5,7);
-    const char* cseed = cseed_str.c_str();
-    long seed = hex2long(cseed);
-    int rand = generateMTRandom(seed, 6000);
-
-    //Random Superblock
-    if(rand > 2075 && rand < 2099)  
-    {
-        nSubsidy *= 5;
-    }
 
     // 1st 2 days bonus
     if(nHeight < 5761)     
@@ -40,7 +31,7 @@ int64_t static GetBlockBaseValue(int nBits, int nHeight)
         nSubsidy = nMinSubsidy;
     }
 
-    return nSubsidy + nFees;
+    return nSubsidy;
 
 }
 
