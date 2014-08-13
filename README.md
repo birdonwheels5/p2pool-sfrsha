@@ -1,7 +1,7 @@
 Requirements:
 -------------------------
 Generic:
-* Bitcoin >=0.8.5
+* Vertcoin >=0.8.5
 * Python >=2.6
 * Twisted >=10.0.0
 * python-argparse (for Python =2.6)
@@ -17,6 +17,24 @@ Windows:
 * Install python win32 api: http://sourceforge.net/projects/pywin32/files/pywin32/Build%20218/
 * Install python win32 api wmi wrapper: https://pypi.python.org/pypi/WMI/#downloads
 * Unzip the files into C:\Python27\Lib\site-packages
+
+
+Install module:
+-------------------------
+
+* apt-get install libboost1.48-all-dev python-dev
+
+
+* git clone https://github.com/chaeplin/SUBSIDY_FUNC.git
+* git clone https://github.com/evan82/xcoin-hash.git
+
+* cd SUBSIDY_FUNC/darkcoin-subsidy-python
+* python setup.py install
+
+* cd xcoin-hash
+* python setup.py install
+
+
 
 Running P2Pool:
 -------------------------
@@ -47,16 +65,16 @@ Alternate web front end :
 -------------------------
 * https://github.com/hardcpp/P2PoolExtendedFrontEnd
 
-Notes for Litecoin:
+Notes for Vertcoin:
 =========================
 Requirements:
 -------------------------
-In order to run P2Pool with the Litecoin network, you would need to build and install the
-ltc_scrypt module that includes the scrypt proof of work code that Litecoin uses for hashes.
+In order to run P2Pool with the Vertcoin network, you would need to build and install the
+vtc_scrypt module that includes the scrypt proof of work code that Vertcoin uses for hashes.
 
 Linux:
 
-    cd litecoin_scrypt
+    cd py_modules/vertcoin_scrypt
     sudo python setup.py install
 
 Windows (mingw):
@@ -65,7 +83,7 @@ Windows (mingw):
 
 In bash type this:
 
-    cd litecoin_scrypt
+    cd py_modules\vertcoin_scrypt
     C:\Python27\python.exe setup.py build --compile=mingw32 install
 
 Windows (microsoft visual c++)
@@ -75,29 +93,21 @@ In bash type this:
 
     SET VS90COMNTOOLS=%VS110COMNTOOLS%	           # For visual c++ 2012
     SET VS90COMNTOOLS=%VS100COMNTOOLS%             # For visual c++ 2010
-    cd litecoin_scrypt
+    cd py_modules\vertcoin_scrypt
     C:\Python27\python.exe setup.py build --compile=mingw32 install
-	
+
 If you run into an error with unrecognized command line option '-mno-cygwin', see this:
 http://stackoverflow.com/questions/6034390/compiling-with-cython-and-mingw-produces-gcc-error-unrecognized-command-line-o
 
 Running P2Pool:
 -------------------------
-Run P2Pool with the "--net litecoin" option.
-Run your miner program, connecting to 127.0.0.1 on port 9327.
-Forward port 9338 to the host running P2Pool.
+Run P2Pool with the "--net vertcoin" option.
+Run your miner program, connecting to 127.0.0.1 on port 9171.
 
-Litecoin's use of ports 9332 and 9332 conflicts with P2Pool running on
-the Bitcoin network. To avoid problems, add these lines to litecoin.conf
-and restart litecoind:
-
-    rpcport=10332
-    port=10333
-
-Notes for DigiByte:
--------------------------
-Digibyte implements a custom subsidy function, that you need to build in order to successfully
-run your P2Pool node. See digibyte_subsidy/README.txt for installation details.
+Notes for Cachecoin:
+=========================
+This is currently under heavy development and still experimental. For the
+current latest stable implementation, please use https://github.com/Sykh/p2pool-cache
 
 Sponsors:
 -------------------------
@@ -105,4 +115,5 @@ Sponsors:
 Thanks to:
 * The Bitcoin Foundation for its generous support of P2Pool
 * The Litecoin Project for its generous donations to P2Pool
+* The Vertcoin Community for its great contribution to P2Pool
 

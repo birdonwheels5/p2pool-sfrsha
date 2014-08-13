@@ -8,27 +8,28 @@ from p2pool.util import math
 # changes can be done by changing one, then the other
 
 nets = dict(
-    
-    saffroncoin=math.Object(
-        PARENT=networks.nets['saffroncoin'],
-        SHARE_PERIOD=10, # seconds
+
+ saffroncoinscrypt=math.Object(
+        PARENT=networks.nets['saffroncoinscrypt'],
+        SHARE_PERIOD=20, # seconds
+        NEW_SHARE_PERIOD=20, # seconds
         CHAIN_LENGTH=24*60*60//10, # shares
         REAL_CHAIN_LENGTH=24*60*60//10, # shares
-        TARGET_LOOKBEHIND=200, # shares
-        SPREAD=3, # blocks
-        IDENTIFIER='e037d5b877474757'.decode('hex'),
-        PREFIX='7208c1a555221151'.decode('hex'),
-        P2P_PORT=1717,
+        TARGET_LOOKBEHIND=50, # shares  //with that the pools share diff is adjusting faster, important if huge hashing power comes to the pool
+        SPREAD=30, # blocks
+        NEW_SPREAD=30, # blocks
+        IDENTIFIER='55984712ffff1147'.decode('hex'),
+        PREFIX='36325418ffff2566'.decode('hex'),
+        P2P_PORT=1716,
         MIN_TARGET=0,
         MAX_TARGET=2**256//2**20 - 1,
         PERSIST=False,
         WORKER_PORT=1718,
-        BOOTSTRAP_ADDRS='p2poolcoin.com'.split(' '),
+        BOOTSTRAP_ADDRS='p2poolcoin.com ca.p2poolcoin.com'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-sfr',
         VERSION_CHECK=lambda v: True,
-        VERSION_WARNING=lambda v: 'Upgrade Litecoin to >=0.8.5.1!' if v < 80501 else None,
     ),
-   
+
 
 )
 for net_name, net in nets.iteritems():

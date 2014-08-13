@@ -269,7 +269,8 @@ class Share(object):
         merkle_root = bitcoin_data.check_merkle_link(self.gentx_hash, self.merkle_link)
         self.header = dict(self.min_header, merkle_root=merkle_root)
         self.pow_hash = net.PARENT.POW_FUNC(bitcoin_data.block_header_type.pack(self.header))
-        self.hash = self.header_hash = bitcoin_data.hash256(bitcoin_data.block_header_type.pack(self.header))
+        #self.hash = self.header_hash = bitcoin_data.hash256(bitcoin_data.block_header_type.pack(self.header))
+        self.hash = self.header_hash = net.PARENT.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(self.header))
         
         if self.target > net.MAX_TARGET:
             from p2pool import p2p
@@ -345,6 +346,8 @@ class Share(object):
         return [known_txs[tx_hash] for tx_hash in other_tx_hashes]
     
     def should_punish_reason(self, previous_block, bits, tracker, known_txs):
+        if (self.header['previous_block'], self.header['bits']) != (previous_block, bits) and self.header_hash != previous_block and self.peer_addr is not None:
+            return True, 'Block-stale detected! height(%x) < height(%x) or %08x != %08x' % (self.header['previous_block'], previous_block, self.header['bits'].bits, bits.bits)
         
         if self.pow_hash <= self.header['bits'].target:
             return -1, 'block solution'

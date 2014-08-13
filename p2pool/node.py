@@ -195,7 +195,11 @@ class Node(object):
         # PEER WORK
         
         self.best_block_header = variable.Variable(None)
+        self.pow_subsidy = 0
         def handle_header(new_header):
+            self.pow_bits = self.bitcoind_work.value['bits']
+            self.pow_subsidy = self.bitcoind_work.value['subsidy']
+
             # check that header matches current target
             if not (self.net.PARENT.POW_FUNC(bitcoin_data.block_header_type.pack(new_header)) <= self.bitcoind_work.value['bits'].target):
                 return
@@ -203,10 +207,12 @@ class Node(object):
             if (self.best_block_header.value is None
                 or (
                     new_header['previous_block'] == bitcoind_best_block and
-                    bitcoin_data.hash256(bitcoin_data.block_header_type.pack(self.best_block_header.value)) == bitcoind_best_block
+                    #bitcoin_data.hash256(bitcoin_data.block_header_type.pack(self.best_block_header.value)) == bitcoind_best_block
+                    self.net.PARENT.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(self.best_block_header.value)) == bitcoind_best_block
                 ) # new is child of current and previous is current
                 or (
-                    bitcoin_data.hash256(bitcoin_data.block_header_type.pack(new_header)) == bitcoind_best_block and
+                    #bitcoin_data.hash256(bitcoin_data.block_header_type.pack(new_header)) == bitcoind_best_block and
+                    self.net.PARENT.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(new_header)) == bitcoind_best_block and
                     self.best_block_header.value['previous_block'] != bitcoind_best_block
                 )): # new is current and previous is not a child of current
                 self.best_block_header.set(new_header)
