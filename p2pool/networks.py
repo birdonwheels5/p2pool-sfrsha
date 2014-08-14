@@ -11,7 +11,7 @@ nets = dict(
 
  saffroncoinscrypt=math.Object(
         PARENT=networks.nets['saffroncoinscrypt'],
-        SHARE_PERIOD=20, # seconds
+        SHARE_PERIOD=15, # seconds
         NEW_SHARE_PERIOD=20, # seconds
         CHAIN_LENGTH=24*60*60//10, # shares
         REAL_CHAIN_LENGTH=24*60*60//10, # shares
@@ -20,12 +20,12 @@ nets = dict(
         NEW_SPREAD=30, # blocks
         IDENTIFIER='55984712ffff1147'.decode('hex'),
         PREFIX='36325418ffff2566'.decode('hex'),
-        P2P_PORT=1716,
+        P2P_PORT=1818,
         MIN_TARGET=0,
         MAX_TARGET=2**256//2**20 - 1,
         PERSIST=False,
-        WORKER_PORT=1718,
-        BOOTSTRAP_ADDRS='p2poolcoin.com ca.p2poolcoin.com'.split(' '),
+        WORKER_PORT=1819,
+        BOOTSTRAP_ADDRS=''.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-sfr',
         VERSION_CHECK=lambda v: True,
     ),
