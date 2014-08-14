@@ -39,7 +39,7 @@ saffroncoinscrypt=math.Object(
         SUBSIDY_FUNC=lambda bitcoind, target: get_subsidy(bitcoind, target),
         BLOCKHASH_FUNC=data.hash256,
         #BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('xcoin_hash').getPoWHash(data)),
-        POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('ltc_scrypt').getPoWHash(data)),
+        POW_FUNC=data.hash256,
         BLOCK_PERIOD=90, # s
         SYMBOL='SFR',
         CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'saffroncoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/saffroncoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.saffroncoin'), 'saffroncoin.conf'),
