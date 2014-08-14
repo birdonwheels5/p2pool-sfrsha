@@ -26,7 +26,7 @@ def get_subsidy(bitcoind, target):
 
 nets = dict(
 
-saffroncoinscrypt=math.Object(
+saffroncoin=math.Object(
         P2P_PREFIX='cf0567ea'.decode('hex'),
         P2P_PORT=19217,
         ADDRESS_VERSION=63,
