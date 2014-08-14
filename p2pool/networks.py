@@ -10,7 +10,7 @@ from p2pool.util import math
 nets = dict(
 
  saffroncoin=math.Object(
-        PARENT=networks.nets['saffroncoinscrypt'],
+        PARENT=networks.nets['saffroncoin'],
         SHARE_PERIOD=15, # seconds
         NEW_SHARE_PERIOD=20, # seconds
         CHAIN_LENGTH=24*60*60//10, # shares
