@@ -32,7 +32,7 @@ saffroncoin=math.Object(
         ADDRESS_VERSION=63,
         RPC_PORT=19216,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
-            'saffroncoin address' in (yield bitcoind.rpc_help()) and
+            'saffroncoin ffjj' in (yield bitcoind.rpc_help()) and
             not (yield bitcoind.rpc_getinfo())['testnet']
         )),                           
         #SUBSIDY_FUNC=lambda nBits, height: __import__('juggalocoin_subsidy').GetBlockBaseValue(nBits, height),
